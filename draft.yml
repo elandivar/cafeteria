@@ -1,0 +1,100 @@
+models:
+
+  Category:
+    name: string:250
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: Product
+
+  Product:
+    name: string:250
+    category_id: id foreign
+    timestamps: true
+    softDeletes: true
+    relationships:
+      belongsTo: Category
+      hasMany: ProductPrice, StocktakingProduct
+
+  ProductPrice:
+    price: decimal:8,2
+    product_id: id foreign
+    starting_from: timestamp
+    timestamps: true
+    softDeletes: true
+
+  Supplier:
+    name: string:250
+    ruc: string:100
+    phone: string:100
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: SupplierRequest
+
+  Employee:
+    firstname: string:250
+    lastname: string:250
+    identification_number: string:100
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: Stocktaking
+
+  SupplierRequest:
+    supplier_id: id foreign
+    order_date: timestamp
+    received_at: timestamp
+    employee_id: id foreign:employee
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: SupplierRequestProduct
+
+  SupplierRequestProduct:
+    supplier_request_id: id foreign
+    product_id: id foreign
+    qty: integer
+    unit_cost: decimal:8,2
+    timestamps: true
+    softDeletes: true
+
+  Stocktaking:
+    date: timestamp
+    comments: string:400
+    employee_id: id foreign
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: StocktakingProduct
+
+  StocktakingProduct:
+    stocktaking_id: id foreign
+    product_id: id foreign
+    qty: integer
+    timestamps: true
+    softDeletes: true
+
+  CashRegisterClosure:
+    employee_id: id foreign
+    amount_initial: decimal:8,2
+    amount_cash: decimal:8,2
+    amount_cc: decimal:8,2
+    timestamps: true
+    softDeletes: true
+
+  ChartAccounts:
+    name: string:200
+    description: string:500
+    parent: integer
+    account_no: string:100
+
+  AccountTransactions:
+    chart_id: id foreign
+    date_transaction: timestamp
+    amount: decimal:8,2
+    direction: 
+
+seeders: Category, Product, Product_price, Supplier, Employee, Supplier_request, Supplier_request_product, Stocktaking, Stocktaking_product, CashRegisterClosure
+
+
