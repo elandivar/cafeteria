@@ -40,7 +40,7 @@ class ProductCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('name')->label('Nombre');
-        CRUD::column('category_id')->type('select')->entity('category')->name('category_id')->model('App\Models\Category')->label('Categoría');;
+        CRUD::column('category_id')->type('select')->entity('category')->name('category_id')->model('App\Models\Category')->label('Categoría');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:

@@ -1,0 +1,62 @@
+created:
+    - database/factories/CategoryFactory.php
+    - database/factories/ProductFactory.php
+    - database/factories/ProductPriceFactory.php
+    - database/factories/SupplierFactory.php
+    - database/factories/EmployeeFactory.php
+    - database/factories/SupplierRequestFactory.php
+    - database/factories/SupplierRequestProductFactory.php
+    - database/factories/StocktakingFactory.php
+    - database/factories/StocktakingProductFactory.php
+    - database/factories/CashRegisterClosureFactory.php
+    - database/factories/ChartAccountsFactory.php
+    - database/factories/AccountTransactionsFactory.php
+    - database/migrations/2022_05_14_192247_create_categories_table.php
+    - database/migrations/2022_05_14_192248_create_products_table.php
+    - database/migrations/2022_05_14_192249_create_product_prices_table.php
+    - database/migrations/2022_05_14_192250_create_suppliers_table.php
+    - database/migrations/2022_05_14_192251_create_employees_table.php
+    - database/migrations/2022_05_14_192252_create_supplier_requests_table.php
+    - database/migrations/2022_05_14_192253_create_supplier_request_products_table.php
+    - database/migrations/2022_05_14_192254_create_stocktakings_table.php
+    - database/migrations/2022_05_14_192255_create_stocktaking_products_table.php
+    - database/migrations/2022_05_14_192256_create_cash_register_closures_table.php
+    - database/migrations/2022_05_14_192257_create_chart_accounts_table.php
+    - database/migrations/2022_05_14_192258_create_account_transactions_table.php
+    - app/Models/Category.php
+    - app/Models/Product.php
+    - app/Models/ProductPrice.php
+    - app/Models/Supplier.php
+    - app/Models/Employee.php
+    - app/Models/SupplierRequest.php
+    - app/Models/SupplierRequestProduct.php
+    - app/Models/Stocktaking.php
+    - app/Models/StocktakingProduct.php
+    - app/Models/CashRegisterClosure.php
+    - app/Models/ChartAccounts.php
+    - app/Models/AccountTransactions.php
+    - database/seeders/CategorySeeder.php
+    - database/seeders/ProductSeeder.php
+    - database/seeders/ProductPriceSeeder.php
+    - database/seeders/SupplierSeeder.php
+    - database/seeders/EmployeeSeeder.php
+    - database/seeders/SupplierRequestSeeder.php
+    - database/seeders/SupplierRequestProductSeeder.php
+    - database/seeders/StocktakingSeeder.php
+    - database/seeders/StocktakingProductSeeder.php
+    - database/seeders/CashRegisterClosureSeeder.php
+    - database/seeders/ChartAccountsSeeder.php
+    - database/seeders/AccountTransactionsSeeder.php
+models:
+    Category: { name: 'string:250', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Product } }
+    Product: { name: 'string:250', category_id: 'id foreign', timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsTo: Category, hasMany: 'ProductPrice, StocktakingProduct' } }
+    ProductPrice: { price: 'decimal:8,2', product_id: 'id foreign', starting_from: timestamp, timestamps: timestamps, softdeletes: softDeletes }
+    Supplier: { name: 'string:250', ruc: 'string:100', phone: 'string:100', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: SupplierRequest } }
+    Employee: { firstname: 'string:250', lastname: 'string:250', identification_number: 'string:100', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Stocktaking } }
+    SupplierRequest: { supplier_id: 'id foreign', order_date: timestamp, received_at: timestamp, employee_id: 'id foreign:employee', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: SupplierRequestProduct } }
+    SupplierRequestProduct: { supplier_request_id: 'id foreign', product_id: 'id foreign', qty: integer, unit_cost: 'decimal:8,2', timestamps: timestamps, softdeletes: softDeletes }
+    Stocktaking: { date: timestamp, comments: 'string:400', employee_id: 'id foreign', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: StocktakingProduct } }
+    StocktakingProduct: { stocktaking_id: 'id foreign', product_id: 'id foreign', qty: integer, timestamps: timestamps, softdeletes: softDeletes }
+    CashRegisterClosure: { employee_id: 'id foreign', amount_initial: 'decimal:8,2', amount_cash: 'decimal:8,2', amount_cc: 'decimal:8,2', timestamps: timestamps, softdeletes: softDeletes }
+    ChartAccounts: { name: 'string:200', description: 'string:500', parent: integer, account_no: 'string:100', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: AccountTransactions } }
+    AccountTransactions: { chart_id: 'id foreign', date_transaction: timestamp, amount: 'decimal:8,2', debit: bool, timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsTo: ChartAccounts } }

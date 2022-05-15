@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSupplierRequestsTable extends Migration
+class CreateCashRegisterClosuresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,12 +15,12 @@ class CreateSupplierRequestsTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('supplier_requests', function (Blueprint $table) {
+        Schema::create('cash_register_closures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('supplier_id')->constrained();
-            $table->timestamp('order_date');
-            $table->timestamp('received_at');
             $table->foreignId('employee_id')->constrained();
+            $table->decimal('amount_initial', 8, 2);
+            $table->decimal('amount_cash', 8, 2);
+            $table->decimal('amount_cc', 8, 2);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -35,6 +35,6 @@ class CreateSupplierRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supplier_requests');
+        Schema::dropIfExists('cash_register_closures');
     }
 }

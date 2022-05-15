@@ -76,8 +76,10 @@ models:
     softDeletes: true
 
   CashRegisterClosure:
+    date: timestamp
     employee_id: id foreign
     amount_initial: decimal:8,2
+    amount_total_before_tax: decimal:8,2
     amount_cash: decimal:8,2
     amount_cc: decimal:8,2
     timestamps: true
@@ -88,13 +90,22 @@ models:
     description: string:500
     parent: integer
     account_no: string:100
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: AccountTransactions
 
   AccountTransactions:
-    chart_id: id foreign
+    chartaccounts_id: id foreign
     date_transaction: timestamp
     amount: decimal:8,2
-    direction: 
+    debit: bool 
+    timestamps: true
+    softDeletes: true
+    relationships:
+      belongsTo: ChartAccounts
 
-seeders: Category, Product, Product_price, Supplier, Employee, Supplier_request, Supplier_request_product, Stocktaking, Stocktaking_product, CashRegisterClosure
+
+seeders: Category, Product, Product_price, Supplier, Employee, Supplier_request, Supplier_request_product, Stocktaking, Stocktaking_product, CashRegisterClosure, ChartAccounts, AccountTransactions 
 
 

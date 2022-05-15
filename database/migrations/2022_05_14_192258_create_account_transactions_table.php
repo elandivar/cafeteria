@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsTable extends Migration
+class CreateAccountTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,10 +15,12 @@ class CreateProductsTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('account_transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 250);
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('chart_id')->constrained();
+            $table->timestamp('date_transaction');
+            $table->decimal('amount', 8, 2);
+            $table->string('debit');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,6 +35,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('account_transactions');
     }
 }
