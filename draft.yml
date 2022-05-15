@@ -13,7 +13,6 @@ models:
     timestamps: true
     softDeletes: true
     relationships:
-      belongsTo: Category
       hasMany: ProductPrice, StocktakingProduct
 
   ProductPrice:
@@ -30,7 +29,7 @@ models:
     timestamps: true
     softDeletes: true
     relationships:
-      hasMany: SupplierRequest
+      hasMany: SupplierRequest, Payment
 
   Employee:
     firstname: string:250
@@ -39,7 +38,8 @@ models:
     timestamps: true
     softDeletes: true
     relationships:
-      hasMany: Stocktaking
+      hasMany: Stocktaking, Payment
+
 
   SupplierRequest:
     supplier_id: id foreign
@@ -85,7 +85,7 @@ models:
     timestamps: true
     softDeletes: true
 
-  ChartAccounts:
+  ChartAccount:
     name: string:200
     description: string:500
     parent: integer
@@ -93,19 +93,27 @@ models:
     timestamps: true
     softDeletes: true
     relationships:
-      hasMany: AccountTransactions
+      hasMany: Payment, AccountTransactions
 
   AccountTransactions:
-    chartaccounts_id: id foreign
+    chartaccount_id: id foreign
     date_transaction: timestamp
     amount: decimal:8,2
     debit: bool 
     timestamps: true
     softDeletes: true
-    relationships:
-      belongsTo: ChartAccounts
 
+  Payment:
+    date: timestamp
+    employee_id: id foreign
+    supplier_id: id foreign
+    chartaccount_id: id foreign
+    amount: decimal:8,2
+    docref: string:200
+    note: string:500
+    timestamps: true
+    softDeletes: true
 
-seeders: Category, Product, Product_price, Supplier, Employee, Supplier_request, Supplier_request_product, Stocktaking, Stocktaking_product, CashRegisterClosure, ChartAccounts, AccountTransactions 
+seeders: Category, Product, Product_price, Supplier, Employee, Supplier_request, Supplier_request_product, Stocktaking, Stocktaking_product, CashRegisterClosure, ChartAccount, AccountTransactions, Payment 
 
 

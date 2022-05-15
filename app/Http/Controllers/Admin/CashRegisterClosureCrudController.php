@@ -28,7 +28,7 @@ class CashRegisterClosureCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\CashRegisterClosure::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/cash-register-closure');
-        CRUD::setEntityNameStrings('cash register closure', 'cash register closures');
+        CRUD::setEntityNameStrings('Cierre de caja', 'Cierres de caja');
     }
 
     /**
@@ -40,12 +40,12 @@ class CashRegisterClosureCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('date')->type('date')->label('Fecha');
-        CRUD::column('employee_id')->type('select')->entity('employee')->name('employee_id')->model('App\Models\Employee')->label('Employee');
-        CRUD::column('amount_total_before_tax');
-        CRUD::column('amount_tax');
-        CRUD::column('amount_tips');
-        CRUD::column('amount_cash');
-        CRUD::column('amount_cc');
+        CRUD::column('employee_id')->type('select')->entity('employee')->name('employee_id')->model('App\Models\Employee')->label('Empleado');
+        CRUD::column('amount_total_before_tax')->label('Subtotal');
+        CRUD::column('amount_tax')->label('IVA');
+        CRUD::column('amount_tips')->label('Tips');
+        CRUD::column('amount_cash')->label('Efectivo');
+        CRUD::column('amount_cc')->label('T.C.');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -64,14 +64,14 @@ class CashRegisterClosureCrudController extends CrudController
     {
         CRUD::setValidation(CashRegisterClosureRequest::class);
 
-        CRUD::field('date');
-        CRUD::field('employee_id');
-        CRUD::field('amount_initial');
-        CRUD::field('amount_total_before_tax');
-        CRUD::field('amount_tax');
-        CRUD::field('amount_tips');
-        CRUD::field('amount_cash');
-        CRUD::field('amount_cc');
+        CRUD::field('date')->label('Fecha de cierre');
+        CRUD::field('employee_id')->label('Empleado');
+        CRUD::field('amount_initial')->label('Monto apertura');
+        CRUD::field('amount_total_before_tax')->label('Subtotal');
+        CRUD::field('amount_tax')->label('IVA');
+        CRUD::field('amount_tips')->label('Tips');
+        CRUD::field('amount_cash')->label('Efectivo');
+        CRUD::field('amount_cc')->label('Tarjeta de crédito');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

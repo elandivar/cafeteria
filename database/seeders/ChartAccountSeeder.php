@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\ChartAccounts;
+use App\Models\ChartAccount;
 use Illuminate\Database\Seeder;
 
-class ChartAccountsSeeder extends Seeder
+class ChartAccountSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class ChartAccountsSeeder extends Seeder
      */
     public function run()
     {
-        ChartAccounts::factory()->count(5)->create();
+        ChartAccount::factory()->count(5)->create();
     }
 }

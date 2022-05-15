@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\SupplierRequestRequest;
+use App\Http\Requests\ChartAccountRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class SupplierRequestCrudController
+ * Class ChartAccountCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class SupplierRequestCrudController extends CrudController
+class ChartAccountCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class SupplierRequestCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\SupplierRequest::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/supplier-request');
-        CRUD::setEntityNameStrings('supplier request', 'supplier requests');
+        CRUD::setModel(\App\Models\ChartAccount::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/chart-account');
+        CRUD::setEntityNameStrings('cuenta contable', 'cuentas contables');
     }
 
     /**
@@ -39,10 +39,10 @@ class SupplierRequestCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('supplier_id');
-        CRUD::column('received_at');
-        CRUD::column('employee_id');
-
+        CRUD::column('name');
+        CRUD::column('description');
+        CRUD::column('parent');
+        CRUD::column('account_no');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -59,42 +59,12 @@ class SupplierRequestCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(SupplierRequestRequest::class);
+        CRUD::setValidation(ChartAccountRequest::class);
 
-        CRUD::field('supplier_id');
-        CRUD::field('received_at');
-        CRUD::field('employee_id');
-        CRUD::addField([   // repeatable
-            'name'  => 'products',
-            'label' => 'Produtos(s)',
-            'type'  => 'repeatable',
-            'fields' => [
-                [
-                    'name' => 'product_id', 'type' => 'select2', 'label' => 'Producto',
-                    'attribute' => "name",
-                    'model' => "App\Models\Product",
-                    'entity' => 'products',
-                    'placeholder' => "Selecione o Produto",
-                    'wrapper'  => [
-                        'class' => 'form-group col-md-6'
-                    ],
-                ],
-                [
-                    'name'  => 'quantity',
-                    'label' => "Cantidad",
-                    'type'  => 'text',
-                    'wrapper'  => [
-                        'class' => 'form-group col-md-6'
-                    ],
-                ],
-            ],
-            // optional
-            'new_item_label'  => 'Adicionar',
-            'init_rows' => 1,
-            'min_rows' => 1,
-            'max_rows' => 3,
-
-        ],);
+        CRUD::field('name');
+        CRUD::field('description');
+        CRUD::field('parent');
+        CRUD::field('account_no');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

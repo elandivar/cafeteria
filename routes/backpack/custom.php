@@ -30,5 +30,6 @@ Route::group([
     Route::crud('supplier-request-product', 'SupplierRequestProductCrudController');
     Route::crud('account-transactions', 'AccountTransactionsCrudController');
     Route::crud('cash-register-closure', 'CashRegisterClosureCrudController');
-    Route::crud('chart-accounts', 'ChartAccountsCrudController');
+    Route::crud('chart-account', 'ChartAccountCrudController');
+    Route::crud('payment', 'PaymentCrudController');
 }); // this should be the absolute last line of this file

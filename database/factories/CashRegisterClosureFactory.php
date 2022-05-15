@@ -24,8 +24,10 @@ class CashRegisterClosureFactory extends Factory
     public function definition()
     {
         return [
+            'date' => $this->faker->dateTime(),
             'employee_id' => Employee::factory(),
             'amount_initial' => $this->faker->randomFloat(2, 0, 999999.99),
+            'amount_total_before_tax' => $this->faker->randomFloat(2, 0, 999999.99),
             'amount_cash' => $this->faker->randomFloat(2, 0, 999999.99),
             'amount_cc' => $this->faker->randomFloat(2, 0, 999999.99),
             'softdeletes' => $this->faker->word,

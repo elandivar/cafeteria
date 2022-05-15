@@ -31,11 +31,6 @@ class Product extends Model
         'category_id' => 'integer',
     ];
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
     public function productPrices()
     {
         return $this->hasMany(ProductPrice::class);
@@ -44,5 +39,10 @@ class Product extends Model
     public function stocktakingProducts()
     {
         return $this->hasMany(StocktakingProduct::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

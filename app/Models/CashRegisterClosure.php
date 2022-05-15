@@ -21,8 +21,6 @@ class CashRegisterClosure extends Model
         'employee_id',
         'amount_initial',
         'amount_total_before_tax',
-        'amount_tax',
-        'amount_tips',
         'amount_cash',
         'amount_cc',
     ];
@@ -38,8 +36,6 @@ class CashRegisterClosure extends Model
         'employee_id' => 'integer',
         'amount_initial' => 'decimal:2',
         'amount_total_before_tax' => 'decimal:2',
-        'amount_tax'  => 'decimal:2',
-        'amount_tips'  => 'decimal:2',
         'amount_cash' => 'decimal:2',
         'amount_cc' => 'decimal:2',
     ];

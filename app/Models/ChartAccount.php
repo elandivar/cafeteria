@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ChartAccounts extends Model
+class ChartAccount extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory, SoftDeletes;
@@ -31,6 +31,11 @@ class ChartAccounts extends Model
     protected $casts = [
         'id' => 'integer',
     ];
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 
     public function accountTransactions()
     {

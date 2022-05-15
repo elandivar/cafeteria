@@ -4,17 +4,19 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\AccountTransactions;
 use App\Models\Chartaccount;
+use App\Models\Employee;
+use App\Models\Payment;
+use App\Models\Supplier;
 
-class AccountTransactionsFactory extends Factory
+class PaymentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = AccountTransactions::class;
+    protected $model = Payment::class;
 
     /**
      * Define the model's default state.
@@ -24,10 +26,13 @@ class AccountTransactionsFactory extends Factory
     public function definition()
     {
         return [
+            'date' => $this->faker->dateTime(),
+            'employee_id' => Employee::factory(),
+            'supplier_id' => Supplier::factory(),
             'chartaccount_id' => Chartaccount::factory(),
-            'date_transaction' => $this->faker->dateTime(),
             'amount' => $this->faker->randomFloat(2, 0, 999999.99),
-            'debit' => $this->faker->word,
+            'docref' => $this->faker->regexify('[A-Za-z0-9]{200}'),
+            'note' => $this->faker->regexify('[A-Za-z0-9]{500}'),
             'softdeletes' => $this->faker->word,
         ];
     }

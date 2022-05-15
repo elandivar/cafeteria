@@ -17,7 +17,7 @@ class AccountTransactions extends Model
      * @var array
      */
     protected $fillable = [
-        'chartaccounts_id',
+        'chartaccount_id',
         'date_transaction',
         'amount',
         'debit',
@@ -30,13 +30,13 @@ class AccountTransactions extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'chartaccounts_id' => 'integer',
+        'chartaccount_id' => 'integer',
         'date_transaction' => 'timestamp',
         'amount' => 'decimal:2',
     ];
 
-    public function chartAccounts()
+    public function chartaccount()
     {
-        return $this->belongsTo(ChartAccounts::class);
+        return $this->belongsTo(Chartaccount::class);
     }
 }

@@ -35,4 +35,9 @@ class Supplier extends Model
     {
         return $this->hasMany(SupplierRequest::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

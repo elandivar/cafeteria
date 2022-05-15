@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SupplierRequest extends Model
+class Payment extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory, SoftDeletes;
@@ -17,9 +17,13 @@ class SupplierRequest extends Model
      * @var array
      */
     protected $fillable = [
-        'supplier_id',
-        'received_at',
+        'date',
         'employee_id',
+        'supplier_id',
+        'chartaccount_id',
+        'amount',
+        'docref',
+        'note',
     ];
 
     /**
@@ -29,14 +33,16 @@ class SupplierRequest extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'supplier_id' => 'integer',
-        'received_at' => 'timestamp',
+        'date' => 'timestamp',
         'employee_id' => 'integer',
+        'supplier_id' => 'integer',
+        'chartaccount_id' => 'integer',
+        'amount' => 'decimal:2',
     ];
 
-    public function supplierRequestProducts()
+    public function employee()
     {
-        return $this->hasMany(SupplierRequestProduct::class);
+        return $this->belongsTo(Employee::class);
     }
 
     public function supplier()
@@ -44,8 +50,8 @@ class SupplierRequest extends Model
         return $this->belongsTo(Supplier::class);
     }
 
-    public function employee()
+    public function chartaccount()
     {
-        return $this->belongsTo(Employee::class);
+        return $this->belongsTo(ChartAccount::class);
     }
 }

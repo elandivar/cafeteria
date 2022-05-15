@@ -28,7 +28,7 @@ class StocktakingCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Stocktaking::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/stocktaking');
-        CRUD::setEntityNameStrings('stocktaking', 'stocktakings');
+        CRUD::setEntityNameStrings('arqueo de inventario', 'arqueos de inventario');
     }
 
     /**

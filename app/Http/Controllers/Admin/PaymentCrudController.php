@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\ChartAccountsRequest;
+use App\Http\Requests\PaymentRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class ChartAccountsCrudController
+ * Class PaymentCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class ChartAccountsCrudController extends CrudController
+class PaymentCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class ChartAccountsCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\ChartAccounts::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/chart-accounts');
-        CRUD::setEntityNameStrings('chart accounts', 'chart accounts');
+        CRUD::setModel(\App\Models\Payment::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/payment');
+        CRUD::setEntityNameStrings('pago proveedor', 'pago proveedores');
     }
 
     /**
@@ -39,10 +39,13 @@ class ChartAccountsCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('name');
-        CRUD::column('description');
-        CRUD::column('parent');
-        CRUD::column('account_no');
+        CRUD::column('date')->type('date')->label('Fecha');
+        CRUD::column('employee_id')->type('select')->entity('employee')->name('employee_id')->model('App\Models\Employee')->label('Pagador');
+        CRUD::column('supplier_id')->type('select')->entity('supplier')->name('supplier_id')->model('App\Models\Supplier')->label('Proveedor');
+        CRUD::column('chartaccount_id')->type('select')->entity('chartaccount')->name('chartaccount_id')->model('App\Models\ChartAccount')->label('Proveedor');
+        CRUD::column('amount');
+        CRUD::column('docref');
+        CRUD::column('note');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -59,12 +62,16 @@ class ChartAccountsCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(ChartAccountsRequest::class);
+        CRUD::setValidation(PaymentRequest::class);
 
-        CRUD::field('name');
-        CRUD::field('description');
-        CRUD::field('parent');
-        CRUD::field('account_no');
+        CRUD::field('date')->label('Fecha de pago')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('employee_id')->label('Empleado Pagador')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        //CRUD::field('chartacccount_id')->type('select')->entity('chartaccount')->model('App\Models\ChartAccount')->attribute('name')->label('Origen de Fondos')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('chartaccount_id')->label('Origen de Fondos')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('supplier_id')->label('Proveedor')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('amount')->label('Cantidad Total Pagada');
+        CRUD::field('docref');
+        CRUD::field('note');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:
