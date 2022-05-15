@@ -9,7 +9,7 @@ Cafeteria es un software to administer a small coffee shop. It goes beyond the t
 
 ## Work in progress
 
-This is a work in progress. Still mot suitable for production environments!
+This is a work in progress. Still NOT suitable for production environments!
 
 ## Contributing
 
