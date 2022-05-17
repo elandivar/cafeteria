@@ -16,6 +16,9 @@ class RotationChartController extends ChartController
     public function setup()
     {
         $this->chart = new Chart();
+        $obj = new \App\Models\CashRegisterClosure();
+
+        
 
         // MANDATORY. Set the labels for the dataset points
         $this->chart->labels([
@@ -31,7 +34,6 @@ class RotationChartController extends ChartController
 
         $this->chart->labels(['One', 'Two', 'Three', 'Four']);
         $this->chart->dataset('Stock Sánduches', 'line', [1, 2, 3, 4]);
-        $this->chart->dataset('Stock Empanadas', 'line', [2, 2, 2.8, 3.4]);
         $this->chart->dataset('Stock Galletas', 'line', [1, 2, 3, 4]);
     }
 

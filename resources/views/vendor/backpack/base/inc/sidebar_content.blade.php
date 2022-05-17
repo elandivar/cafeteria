@@ -21,7 +21,7 @@
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> Empleados</a>
     <ul class="nav-dropdown-items">
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('employee') }}'><i class='nav-icon la la-users'></i> Empleados</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('employee-workinghours') }}'><i class='nav-icon la la-clock'></i> Turnos</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('employee-workinghours') }}'><i class='nav-icon la la-clock'></i> Horarios</a></li>
     </ul>
 </li>
 <!-- Inventario -->
@@ -44,8 +44,16 @@
 </li>
 <!-- CRM -->
 <li class="nav-item nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-briefcase"></i> CRM</a>
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-handshake"></i> CRM</a>
     <ul class="nav-dropdown-items">
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('contact') }}'><i class='nav-icon la la-address-card'></i> Contactos</a></li>
     </ul>
 </li>
+<!-- SYSTEM -->
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-laptop-code"></i> System</a>
+    <ul class="nav-dropdown-items">
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('configuration') }}'><i class='nav-icon la la-tools'></i> Configurations</a></li>
+    </ul>
+</li>
+
