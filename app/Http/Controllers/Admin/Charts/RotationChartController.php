@@ -16,9 +16,9 @@ class RotationChartController extends ChartController
     public function setup()
     {
         $this->chart = new Chart();
-        $obj = new \App\Models\CashRegisterClosure();
 
-        
+        $obj = new \App\Models\CashRegisterClosure();
+        $resCashRegisterClosure = $obj->get();
 
         // MANDATORY. Set the labels for the dataset points
         $this->chart->labels([
@@ -32,9 +32,21 @@ class RotationChartController extends ChartController
         $this->chart->minimalist(false);
         $this->chart->displayLegend(true);
 
-        $this->chart->labels(['One', 'Two', 'Three', 'Four']);
-        $this->chart->dataset('Stock Sánduches', 'line', [1, 2, 3, 4]);
-        $this->chart->dataset('Stock Galletas', 'line', [1, 2, 3, 4]);
+        $cant_relleno = 14 - count($resCashRegisterClosure);
+        $arrLabels   = array_fill(0,$cant_relleno,"");            
+        $arrDataCash = array_fill(0,$cant_relleno,"");
+        $arrDataCC   = array_fill(0,$cant_relleno,"");
+        foreach($resCashRegisterClosure as $rclosure) {
+            $rclosure_attributes = $rclosure->getAttributes();
+            $date = date_create($rclosure_attributes['date']);
+            $arrLabels[] = date_format($date, 'M-d');
+            $arrDataCash[] = $rclosure_attributes['amount_cash'];
+            $arrDataCC[] = $rclosure_attributes['amount_cc'];
+        }
+
+        $this->chart->labels($arrLabels);
+        $this->chart->dataset('Cash', 'line', $arrDataCash)->color('rgba(18, 152, 219, 0.8)')->backgroundColor('rgba(18, 152, 219, 0.3)');
+        $this->chart->dataset('CC', 'line', $arrDataCC);
     }
 
     /**
