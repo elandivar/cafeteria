@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StocktalkingRequest;
+use App\Http\Requests\EmployeeWorkinghoursRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class StocktalkingCrudController
+ * Class EmployeeWorkinghoursCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class StocktalkingCrudController extends CrudController
+class EmployeeWorkinghoursCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class StocktalkingCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Stocktalking::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/stocktalking');
-        CRUD::setEntityNameStrings('stocktalking', 'stocktalkings');
+        CRUD::setModel(\App\Models\EmployeeWorkinghours::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/employee-workinghours');
+        CRUD::setEntityNameStrings('employee workinghours', 'employee workinghours');
     }
 
     /**
@@ -40,6 +40,11 @@ class StocktalkingCrudController extends CrudController
     protected function setupListOperation()
     {
         
+        CRUD::column('employee_id');
+        CRUD::column('mon_start');
+        CRUD::column('mon_end');
+        CRUD::column('tue_start');
+        CRUD::column('tue_end');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -56,9 +61,23 @@ class StocktalkingCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(StocktalkingRequest::class);
+        CRUD::setValidation(EmployeeWorkinghoursRequest::class);
 
-        
+        CRUD::field('employee_id');
+        CRUD::field('mon_start')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('mon_end')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('tue_start')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('tue_end')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('wed_start')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('wed_end')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('thu_start')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('thu_end')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('fri_start')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('fri_end')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('sat_start')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('sat_end')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('sun_start')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
+        CRUD::field('sun_end')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

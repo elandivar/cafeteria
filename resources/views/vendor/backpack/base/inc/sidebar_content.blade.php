@@ -21,6 +21,7 @@
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> Empleados</a>
     <ul class="nav-dropdown-items">
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('employee') }}'><i class='nav-icon la la-users'></i> Empleados</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('employee-workinghours') }}'><i class='nav-icon la la-clock'></i> Turnos</a></li>
     </ul>
 </li>
 <!-- Inventario -->
@@ -37,7 +38,14 @@
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-briefcase"></i> Contabilidad</a>
     <ul class="nav-dropdown-items">
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('account-transactions') }}'><i class='nav-icon la la-question'></i> Account transactions</a></li>
-        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('chart-account') }}'><i class='nav-icon la la-file-invoice-dollar'></i> Chart accounts</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('chart-account') }}'><i class='nav-icon la la-file-invoice-dollar'></i> Cuentas</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('account-transactions') }}'><i class='nav-icon la la-money-check'></i> Transacciones</a></li>
+    </ul>
+</li>
+<!-- CRM -->
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-briefcase"></i> CRM</a>
+    <ul class="nav-dropdown-items">
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('contact') }}'><i class='nav-icon la la-address-card'></i> Contactos</a></li>
     </ul>
 </li>

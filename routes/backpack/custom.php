@@ -24,12 +24,12 @@ Route::group([
     Route::crud('supplier', 'SupplierCrudController');
     Route::crud('supplier-request', 'SupplierRequestCrudController');
     Route::get('charts/rotation', 'Charts\RotationChartController@response')->name('charts.rotation.index');
-    Route::crud('stocktalking-product', 'StocktalkingProductCrudController');
-    Route::crud('stocktalking', 'StocktalkingCrudController');
     Route::crud('stocktaking-product', 'StocktakingProductCrudController');
     Route::crud('supplier-request-product', 'SupplierRequestProductCrudController');
     Route::crud('account-transactions', 'AccountTransactionsCrudController');
     Route::crud('cash-register-closure', 'CashRegisterClosureCrudController');
     Route::crud('chart-account', 'ChartAccountCrudController');
     Route::crud('payment', 'PaymentCrudController');
+    Route::crud('contact', 'ContactCrudController');
+    Route::crud('employee-workinghours', 'EmployeeWorkinghoursCrudController');
 }); // this should be the absolute last line of this file

@@ -18,6 +18,7 @@ class SupplierRequest extends Model
      */
     protected $fillable = [
         'supplier_id',
+        'order_date',
         'received_at',
         'employee_id',
     ];
@@ -30,6 +31,7 @@ class SupplierRequest extends Model
     protected $casts = [
         'id' => 'integer',
         'supplier_id' => 'integer',
+        'order_date' => 'timestamp',
         'received_at' => 'timestamp',
         'employee_id' => 'integer',
     ];

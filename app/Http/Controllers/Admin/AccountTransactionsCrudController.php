@@ -28,7 +28,7 @@ class AccountTransactionsCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\AccountTransactions::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/account-transactions');
-        CRUD::setEntityNameStrings('account transactions', 'account transactions');
+        CRUD::setEntityNameStrings('transacción contable', 'transacciones contables');
     }
 
     /**
@@ -39,10 +39,11 @@ class AccountTransactionsCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('chart_id');
-        CRUD::column('date_transaction');
-        CRUD::column('amount');
-        CRUD::column('debit');
+        CRUD::column('chartaccount_id')->type('select')->entity('chartaccount')->name('chartaccount_id')->model('App\Models\ChartAccount')->label('Cuenta');
+        CRUD::column('date_transaction')->type('date')->label('Fecha');
+        CRUD::column('amount')->label('Monto');
+        CRUD::column('debit')->label('Debito/Crédito');
+        CRUD::column('note')->label('Notas');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -61,10 +62,11 @@ class AccountTransactionsCrudController extends CrudController
     {
         CRUD::setValidation(AccountTransactionsRequest::class);
 
-        CRUD::field('chart_id');
-        CRUD::field('date_transaction');
-        CRUD::field('amount');
-        CRUD::field('debit');
+        CRUD::field('chartaccount_id');
+        CRUD::field('date_transaction')->label('Fecha Transacción');
+        CRUD::field('amount')->label('Monto');
+        CRUD::field('debit')->label('Debito/Credito');
+        CRUD::field('note')->label('Notas');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

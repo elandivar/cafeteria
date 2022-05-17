@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StocktalkingProductRequest;
+use App\Http\Requests\ContactRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class StocktalkingProductCrudController
+ * Class ContactCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class StocktalkingProductCrudController extends CrudController
+class ContactCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class StocktalkingProductCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\StocktalkingProduct::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/stocktalking-product');
-        CRUD::setEntityNameStrings('stocktalking product', 'stocktalking products');
+        CRUD::setModel(\App\Models\Contact::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/contact');
+        CRUD::setEntityNameStrings('contacto', 'contactos');
     }
 
     /**
@@ -39,7 +39,10 @@ class StocktalkingProductCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        
+        CRUD::column('first_name')->label('Nombres');
+        CRUD::column('last_name')->label('Apellidos');
+        CRUD::column('email');
+        CRUD::column('phone_cel')->label('Teléfono');
 
         /**
          * Columns can be defined using the fluent syntax or array syntax:
@@ -56,9 +59,13 @@ class StocktalkingProductCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(StocktalkingProductRequest::class);
+        CRUD::setValidation(ContactRequest::class);
 
-        
+        CRUD::field('date_created')->label('Fecha Creación');
+        CRUD::field('first_name')->label('Nombres');
+        CRUD::field('last_name')->label('Apellidos');
+        CRUD::field('email');
+        CRUD::field('phone_cel')->label('Teléfono');
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

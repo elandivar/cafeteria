@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AccountTransactions extends Model
+class Contact extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -17,11 +16,11 @@ class AccountTransactions extends Model
      * @var array
      */
     protected $fillable = [
-        'chartaccount_id',
-        'date_transaction',
-        'amount',
-        'debit',
-        'note',
+        'date_created',
+        'first_name',
+        'last_name',
+        'email',
+        'phone_cel',
     ];
 
     /**
@@ -31,13 +30,6 @@ class AccountTransactions extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'chartaccount_id' => 'integer',
-        'date_transaction' => 'timestamp',
-        'amount' => 'decimal:2',
+        'date_created' => 'date',
     ];
-
-    public function chartaccount()
-    {
-        return $this->belongsTo(ChartAccount::class);
-    }
 }

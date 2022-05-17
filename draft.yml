@@ -38,8 +38,15 @@ models:
     timestamps: true
     softDeletes: true
     relationships:
-      hasMany: Stocktaking, Payment
+      hasMany: Stocktaking, Payment, Employee_workinghours
 
+  Employee_workinghours:
+    employee_id: id foreign
+    weekday: integer
+    daytime_start: time
+    daytime_end: time
+    timestamps: true
+    softDeletes: true
 
   SupplierRequest:
     supplier_id: id foreign
@@ -82,6 +89,7 @@ models:
     amount_total_before_tax: decimal:8,2
     amount_cash: decimal:8,2
     amount_cc: decimal:8,2
+    transaction: integer
     timestamps: true
     softDeletes: true
 
@@ -100,6 +108,7 @@ models:
     date_transaction: timestamp
     amount: decimal:8,2
     debit: bool 
+    note: string:500
     timestamps: true
     softDeletes: true
 
@@ -113,6 +122,15 @@ models:
     note: string:500
     timestamps: true
     softDeletes: true
+
+  Contact:
+    date_created: date
+    first_name: string:250
+    last_name: string:250
+    email: string:400
+    phone_cel: string:250
+
+
 
 seeders: Category, Product, Product_price, Supplier, Employee, Supplier_request, Supplier_request_product, Stocktaking, Stocktaking_product, CashRegisterClosure, ChartAccount, AccountTransactions, Payment 
 

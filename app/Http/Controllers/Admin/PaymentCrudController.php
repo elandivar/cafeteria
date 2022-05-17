@@ -42,8 +42,8 @@ class PaymentCrudController extends CrudController
         CRUD::column('date')->type('date')->label('Fecha');
         CRUD::column('employee_id')->type('select')->entity('employee')->name('employee_id')->model('App\Models\Employee')->label('Pagador');
         CRUD::column('supplier_id')->type('select')->entity('supplier')->name('supplier_id')->model('App\Models\Supplier')->label('Proveedor');
-        CRUD::column('chartaccount_id')->type('select')->entity('chartaccount')->name('chartaccount_id')->model('App\Models\ChartAccount')->label('Proveedor');
-        CRUD::column('amount');
+        CRUD::column('chartaccount_id')->type('select')->entity('chartaccount')->name('chartaccount_id')->model('App\Models\ChartAccount')->label('Origen Fondos');
+        CRUD::column('amount')->label('Monto');
         CRUD::column('docref');
         CRUD::column('note');
 
@@ -66,7 +66,6 @@ class PaymentCrudController extends CrudController
 
         CRUD::field('date')->label('Fecha de pago')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
         CRUD::field('employee_id')->label('Empleado Pagador')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
-        //CRUD::field('chartacccount_id')->type('select')->entity('chartaccount')->model('App\Models\ChartAccount')->attribute('name')->label('Origen de Fondos')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
         CRUD::field('chartaccount_id')->label('Origen de Fondos')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
         CRUD::field('supplier_id')->label('Proveedor')->wrapperAttributes([ 'class' => 'form-group col-md-6' ]);
         CRUD::field('amount')->label('Cantidad Total Pagada');

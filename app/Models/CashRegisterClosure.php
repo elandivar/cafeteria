@@ -21,6 +21,8 @@ class CashRegisterClosure extends Model
         'employee_id',
         'amount_initial',
         'amount_total_before_tax',
+        'amount_tax',
+        'amount_tips',
         'amount_cash',
         'amount_cc',
     ];
@@ -36,12 +38,35 @@ class CashRegisterClosure extends Model
         'employee_id' => 'integer',
         'amount_initial' => 'decimal:2',
         'amount_total_before_tax' => 'decimal:2',
+        'amount_tax'  => 'decimal:2',
+        'amount_tips' => 'decimal:2',
         'amount_cash' => 'decimal:2',
-        'amount_cc' => 'decimal:2',
+        'amount_cc'   => 'decimal:2',
+        'transaction' => 'integer',
     ];
 
     public function employee()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    public function setAmountCcAttribute($value) 
+    {
+
+        $obj = new AccountTransactions();
+        $obj->chartaccount_id = 1;
+        $obj->date_transaction = $this->attributes['date'];
+        $obj->amount = $this->attributes['amount_cash'];
+        $obj->debit = 'C';
+        $obj->save();
+
+        $obj = new AccountTransactions();
+        $obj->chartaccount_id = 2;
+        $obj->date_transaction = $this->attributes['date'];
+        $obj->amount = $this->attributes['amount_tips'];
+        $obj->debit = 'C';
+        $obj->save();
+
+        $this->attributes['amount_cc'] = $value;
     }
 }

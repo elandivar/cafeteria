@@ -40,4 +40,9 @@ class Employee extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function employeeWorkinghours()
+    {
+        return $this->hasMany(EmployeeWorkinghours::class);
+    }
 }

@@ -4,6 +4,7 @@ created:
     - database/factories/ProductPriceFactory.php
     - database/factories/SupplierFactory.php
     - database/factories/EmployeeFactory.php
+    - database/factories/EmployeeWorkinghoursFactory.php
     - database/factories/SupplierRequestFactory.php
     - database/factories/SupplierRequestProductFactory.php
     - database/factories/StocktakingFactory.php
@@ -12,24 +13,28 @@ created:
     - database/factories/ChartAccountFactory.php
     - database/factories/AccountTransactionsFactory.php
     - database/factories/PaymentFactory.php
-    - database/migrations/2022_05_15_175835_create_categories_table.php
-    - database/migrations/2022_05_15_175836_create_products_table.php
-    - database/migrations/2022_05_15_175837_create_product_prices_table.php
-    - database/migrations/2022_05_15_175838_create_suppliers_table.php
-    - database/migrations/2022_05_15_175839_create_employees_table.php
-    - database/migrations/2022_05_15_175840_create_supplier_requests_table.php
-    - database/migrations/2022_05_15_175841_create_supplier_request_products_table.php
-    - database/migrations/2022_05_15_175842_create_stocktakings_table.php
-    - database/migrations/2022_05_15_175843_create_stocktaking_products_table.php
-    - database/migrations/2022_05_15_175844_create_cash_register_closures_table.php
-    - database/migrations/2022_05_15_175845_create_chart_accounts_table.php
-    - database/migrations/2022_05_15_175846_create_account_transactions_table.php
-    - database/migrations/2022_05_15_175847_create_payments_table.php
+    - database/factories/ContactFactory.php
+    - database/migrations/2022_05_16_220140_create_categories_table.php
+    - database/migrations/2022_05_16_220141_create_products_table.php
+    - database/migrations/2022_05_16_220142_create_product_prices_table.php
+    - database/migrations/2022_05_16_220143_create_suppliers_table.php
+    - database/migrations/2022_05_16_220144_create_employees_table.php
+    - database/migrations/2022_05_16_220145_create_employee_workinghours_table.php
+    - database/migrations/2022_05_16_220146_create_supplier_requests_table.php
+    - database/migrations/2022_05_16_220147_create_supplier_request_products_table.php
+    - database/migrations/2022_05_16_220148_create_stocktakings_table.php
+    - database/migrations/2022_05_16_220149_create_stocktaking_products_table.php
+    - database/migrations/2022_05_16_220150_create_cash_register_closures_table.php
+    - database/migrations/2022_05_16_220151_create_chart_accounts_table.php
+    - database/migrations/2022_05_16_220152_create_account_transactions_table.php
+    - database/migrations/2022_05_16_220153_create_payments_table.php
+    - database/migrations/2022_05_16_220154_create_contacts_table.php
     - app/Models/Category.php
     - app/Models/Product.php
     - app/Models/ProductPrice.php
     - app/Models/Supplier.php
     - app/Models/Employee.php
+    - app/Models/Employee_workinghours.php
     - app/Models/SupplierRequest.php
     - app/Models/SupplierRequestProduct.php
     - app/Models/Stocktaking.php
@@ -38,6 +43,7 @@ created:
     - app/Models/ChartAccount.php
     - app/Models/AccountTransactions.php
     - app/Models/Payment.php
+    - app/Models/Contact.php
     - database/seeders/CategorySeeder.php
     - database/seeders/ProductSeeder.php
     - database/seeders/ProductPriceSeeder.php
@@ -56,13 +62,15 @@ models:
     Product: { name: 'string:250', category_id: 'id foreign', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: 'ProductPrice, StocktakingProduct' } }
     ProductPrice: { price: 'decimal:8,2', product_id: 'id foreign', starting_from: timestamp, timestamps: timestamps, softdeletes: softDeletes }
     Supplier: { name: 'string:250', ruc: 'string:100', phone: 'string:100', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: 'SupplierRequest, Payment' } }
-    Employee: { firstname: 'string:250', lastname: 'string:250', identification_number: 'string:100', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: 'Stocktaking, Payment' } }
+    Employee: { firstname: 'string:250', lastname: 'string:250', identification_number: 'string:100', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: 'Stocktaking, Payment, Employee_workinghours' } }
     SupplierRequest: { supplier_id: 'id foreign', order_date: timestamp, received_at: timestamp, employee_id: 'id foreign:employee', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: SupplierRequestProduct } }
     SupplierRequestProduct: { supplier_request_id: 'id foreign', product_id: 'id foreign', qty: integer, unit_cost: 'decimal:8,2', timestamps: timestamps, softdeletes: softDeletes }
     Stocktaking: { date: timestamp, comments: 'string:400', employee_id: 'id foreign', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: StocktakingProduct } }
     StocktakingProduct: { stocktaking_id: 'id foreign', product_id: 'id foreign', qty: integer, timestamps: timestamps, softdeletes: softDeletes }
     CashRegisterClosure: { date: timestamp, employee_id: 'id foreign', amount_initial: 'decimal:8,2', amount_total_before_tax: 'decimal:8,2', amount_cash: 'decimal:8,2', amount_cc: 'decimal:8,2', timestamps: timestamps, softdeletes: softDeletes }
     ChartAccounts: { name: 'string:200', description: 'string:500', parent: integer, account_no: 'string:100', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: AccountTransactions } }
-    AccountTransactions: { chartaccount_id: 'id foreign', date_transaction: timestamp, amount: 'decimal:8,2', debit: bool, timestamps: timestamps, softdeletes: softDeletes }
+    AccountTransactions: { chartaccount_id: 'id foreign', date_transaction: timestamp, amount: 'decimal:8,2', debit: bool, note: 'string:500', timestamps: timestamps, softdeletes: softDeletes }
     Payment: { date: timestamp, employee_id: 'id foreign', supplier_id: 'id foreign', chartaccount_id: 'id foreign', amount: 'decimal:8,2', docref: 'string:200', note: 'string:500', timestamps: timestamps, softdeletes: softDeletes }
     ChartAccount: { name: 'string:200', description: 'string:500', parent: integer, account_no: 'string:100', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: 'Payment, AccountTransactions' } }
+    Contact: { date_created: date, first_name: 'string:250', last_name: 'string:250', email: 'string:400', phone_cel: 'string:250' }
+    Employee_workinghours: { employee_id: 'id foreign', weekday: integer, daytime_start: time, daytime_end: time, timestamps: timestamps, softdeletes: softDeletes }

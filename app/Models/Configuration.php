@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AccountTransactions extends Model
+class Configuration extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory, SoftDeletes;
@@ -17,11 +17,8 @@ class AccountTransactions extends Model
      * @var array
      */
     protected $fillable = [
-        'chartaccount_id',
-        'date_transaction',
-        'amount',
-        'debit',
-        'note',
+        'attribute',
+        'value',
     ];
 
     /**
@@ -31,13 +28,6 @@ class AccountTransactions extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'chartaccount_id' => 'integer',
-        'date_transaction' => 'timestamp',
-        'amount' => 'decimal:2',
     ];
 
-    public function chartaccount()
-    {
-        return $this->belongsTo(ChartAccount::class);
-    }
 }

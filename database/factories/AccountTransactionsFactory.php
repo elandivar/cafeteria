@@ -28,6 +28,7 @@ class AccountTransactionsFactory extends Factory
             'date_transaction' => $this->faker->dateTime(),
             'amount' => $this->faker->randomFloat(2, 0, 999999.99),
             'debit' => $this->faker->word,
+            'note' => $this->faker->regexify('[A-Za-z0-9]{500}'),
             'softdeletes' => $this->faker->word,
         ];
     }

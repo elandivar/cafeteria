@@ -54,4 +54,17 @@ class Payment extends Model
     {
         return $this->belongsTo(ChartAccount::class);
     }
+
+    public function setAmountAttribute($value)
+    {
+        $obj = new AccountTransactions();
+        $obj->chartaccount_id = 1;
+        $obj->date_transaction = $this->attributes['date'];
+        $obj->amount = $value;
+        $obj->debit = 'D';
+        $obj->save();
+
+        $this->attributes['amount'] = $value;
+
+    }
 }
