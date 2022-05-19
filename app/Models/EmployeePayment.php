@@ -18,7 +18,7 @@ class Payment extends Model
      */
     protected $fillable = [
         'date',
-        'employee_id',
+        'employee_paid',
         'supplier_id',
         'chartaccount_id',
         'amount',
@@ -34,21 +34,16 @@ class Payment extends Model
     protected $casts = [
         'id' => 'integer',
         'date' => 'timestamp',
-        'employee_id' => 'integer',
+        'employee_paid' => 'integer',
         'supplier_id' => 'integer',
         'chartaccount_id' => 'integer',
         'transaction' => 'integer',
         'amount' => 'decimal:2',
     ];
 
-    public function employee()
+    public function employeepaid()
     {
         return $this->belongsTo(Employee::class);
-    }
-
-    public function supplier()
-    {
-        return $this->belongsTo(Supplier::class);
     }
 
     public function chartaccount()

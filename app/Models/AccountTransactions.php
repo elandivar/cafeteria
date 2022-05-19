@@ -31,6 +31,7 @@ class AccountTransactions extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'groupid' => 'integer',
         'chartaccount_id' => 'integer',
         'date_transaction' => 'timestamp',
         'amount' => 'decimal:2',

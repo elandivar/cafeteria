@@ -25,7 +25,13 @@ class CashRegisterClosureRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'date' => 'required|date',
+            'amount_initial' => 'required|numeric',
+            'amount_total_before_tax' => 'required|numeric',
+            'amount_tax' => 'required|numeric',
+            'amount_tips' => 'required|numeric',
+            'amount_cash' => 'required|numeric',
+            'amount_cc' => 'required|numeric',
         ];
     }
 
